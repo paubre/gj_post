@@ -72,7 +72,7 @@ with open('gj-posts-final.csv', 'r') as csvfile:
 
         #moygroupe
         account_name = (row['account_name'])
-        l1 = list([int(row['actual_like_count']), expected_like_count, count_ct])
+        l1 = list([actual_like_count, expected_like_count, count_ct])
 
         if account_name not in groupe:
             count_ct = 1
@@ -84,7 +84,7 @@ with open('gj-posts-final.csv', 'r') as csvfile:
 
         #toplikepost
         post_url = (row['post_url'])
-        like[post_url] = int(row['actual_like_count'])
+        like[post_url] = actual_like_count
 
 
     #average
