@@ -33,14 +33,12 @@ with open('gj-posts-final.csv', 'r') as csvfile:
     topgroupe = " "
     max_groupe = -math.inf
     groupe_moy = {}
-    top10 = {}
 
     #toplikepost
     post_url = 0
     toplike = " "
     max_like = -math.inf
     like = {}
-    top10like = {}
 
     #median
     nb = []
