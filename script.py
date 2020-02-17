@@ -47,6 +47,8 @@ with open('gj-posts-final.csv', 'r') as csvfile:
 
     for row in tqdm(reader, unit='line', total=9755214):
         actual_like_count  = int(row['actual_like_count'])
+        expected_like_count = int(row['expected_like_count'])
+
         nb_ligne += 1
         
         #median
@@ -54,23 +56,23 @@ with open('gj-posts-final.csv', 'r') as csvfile:
 
         #average
         sum_actual += actual_like_count
-        sum_expected += int(row['expected_like_count'])
+        sum_expected += expected_like_count
         count += 1
 
         #minmax
         if max_actual < actual_like_count:
             max_actual = actual_like_count
-        if max_expected < int(row['expected_like_count']):
-            max_expected = int(row['expected_like_count'])
+        if max_expected < expected_like_count: 
+            max_expected = expected_like_count
 
         if min_actual > actual_like_count:
             min_actual = actual_like_count
-        if min_expected > int(row['expected_like_count']):
-            min_expected = int(row['expected_like_count'])
+        if min_expected > expected_like_count:
+            min_expected = expected_like_count
 
         #moygroupe
         account_name = (row['account_name'])
-        l1 = list([int(row['actual_like_count']), int(row['expected_like_count']), count_ct])
+        l1 = list([int(row['actual_like_count']), expected_like_count, count_ct])
 
         if account_name not in groupe:
             count_ct = 1
@@ -106,28 +108,27 @@ with open('gj-posts-final.csv', 'r') as csvfile:
             max_groupe = moy_actual_like
 
         moy_expected_like = (n[1]/n[2])
-        print("name : ", g, "\taverage actual like count", moy_actual_like, "\taverage expected like count", moy_expected_like)
+        print("name : %s \taverage actual like count : %s \taverage expected like count : %s" %(g, moy_actual_like, moy_expected_like))
 
     #top10groupe
     print("top 10 groupe :")
-    top10 = dict(Counter(groupe_moy).most_common(100))
-    for cle, valeur in top10.items():
-        print(cle, valeur)
+    for key, counter in Counter(groupe_moy).most_common(100):
+        print(key, counter)
 
     print("nombre groupe :", len(groupe))
 
     #toplikepost
     print("top 10 post like :")
-    top10like = dict(Counter(like).most_common(10))
-    for key, value in top10like.items():
+    for key, value in Counter(like).most_common(10):
         print(key, value)
 
     #median
     nb.sort()
-    if nb_ligne % 2 == 0 :
-        print("median : ", nb[int(nb_ligne/2 - 1)]) #-1 pq liste commence à l'indice 0
-    else:
-        print("median : ", nb[int(nb_ligne/2 - 2)])
+    print("median :", nb[4877606])
+    # if nb_ligne % 2 == 0 :
+    #     print("median : ", nb[int(nb_ligne/2 - 1)]) #-1 pq liste commence à l'indice 0
+    # else:
+    #     print("median : ", nb[int(nb_ligne/2 - 2)])
 
 
 
